@@ -1,13 +1,11 @@
-const express = require('express')
+require("dotenv").config();
+const express = require('express');
+const router = require("./router");
 
-const app = express()
-
-const validarUrl = require('./middlewares/validarUrl');
-const schemaUrl = require('./schemas/schemaUrl');
-const { download } = require('./controllers/urlController');
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(router);
 
-app.get('/download', validarUrl(schemaUrl), download);
-
-app.listen(process.env.PORT);
+app.listen(port);
